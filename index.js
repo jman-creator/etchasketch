@@ -51,7 +51,6 @@ function renderGrid(container, containerSize, squaresPerRow) {
         
         // Add mouseover listener
         square.addEventListener("mouseover", (e) => {
-            e.target.classList.add("trail");
         });
     }
 }

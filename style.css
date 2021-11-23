@@ -9,7 +9,3 @@ body {
     display: grid;
     border: 5px solid black;
 }
-
-.trail {
-    background-color: tomato;
-}
