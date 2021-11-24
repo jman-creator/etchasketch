@@ -50,8 +50,7 @@ function renderGrid(container, containerSize, squaresPerRow) {
         container.append(square);
         
         // Add mouseover listener
-        square.addEventListener("mouseover", (e) => {
-        });
+        square.addEventListener("mouseover", e => randomColor(e));
     }
 }
 
@@ -60,4 +59,42 @@ function removeGrid(container) {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
+}
+
+// Give target a random color and darken for each pass
+function randomColor(e) {
+    const square = e.target;
+    const shadeFactor = 0.1;
+
+    let R, G, B;
+
+    if (square.classList.contains("passed")) {
+        // Darken
+        R = parseInt(square.getAttribute("r") - square.getAttribute("r-decrement"));
+        G = parseInt(square.getAttribute("g") - square.getAttribute("g-decrement"));
+        B = parseInt(square.getAttribute("b") - square.getAttribute("b-decrement"));
+
+        square.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
+    }
+    else {
+        // Give random color
+        R = Math.floor(Math.random() * 256);
+        G = Math.floor(Math.random() * 256);
+        B = Math.floor(Math.random() * 256);
+        
+        square.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
+        square.classList.add("passed");
+
+        // Constant decrement for each channel
+        // Shade by 1/10 of first value on each pass
+        square.setAttribute("r-decrement", `${R * shadeFactor}`);
+        square.setAttribute("g-decrement", `${G * shadeFactor}`);
+        square.setAttribute("b-decrement", `${B * shadeFactor}`);
+    }
+    
+    // Save color components for darkening later
+    square.setAttribute("r", `${R}`);
+    square.setAttribute("g", `${G}`);
+    square.setAttribute("b", `${B}`);
+    
 }
