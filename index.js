@@ -85,7 +85,7 @@ function randomColor(e) {
         square.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
         square.classList.add("passed");
 
-        // Constant decrement for each channel
+        // Save constant decrement for each channel
         // Shade by 1/10 of first value on each pass
         square.setAttribute("r-decrement", `${R * shadeFactor}`);
         square.setAttribute("g-decrement", `${G * shadeFactor}`);
